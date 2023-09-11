@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock, Paper, Scissors Game</title>
+    <style>
+        .output {
+            font-size: 30px;
+            font-weight: bold;
+            margin-top: 20px;
+            color:blue;
+        }
+        .score {
+            font-size:30px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+        img{
+            height:250px;
+            width:250px;
+        }
+        button{
+            margin-top:10px;
+            height:40px;
+            width:100px;
+            padding:10px;
+            background-color:green;
+        }
+        h1{
+            color:red;
+        }
+    </style>
+</head>
+<body>
+    <center><h1>Rock-Paper-Scissor</h1>
+    <div class="choices" style="height:300px;width:900px">
+       <div style="float:left;height:100px;width:300px"> 
+        <img src="images/rock.png" alt="Rock">
+        <button onclick="play('rock')" >ROCK</button>
+       </div>
+       <div style="float:left;height:100px;width:300px">
+        <img src="images/paper.png" alt="Paper">
+        <button onclick="play('paper')">PAPER</button>
+       </div>
+       <div style="float:left;height:100px;width:300px">
+        <img src="images/scissors.png" alt="Scissors">
+        <button onclick="play('scissors')">SCISSOR</button>
+       </div>
+    </div>
+    <div class="output" id="output"></div>
+    <div class="score" id="score">Score: 0</div></center>
+    <script>
+        let score = 0;
+
+        function play(playerChoice) {
+            const mychoice = ['rock', 'paper', 'scissor'];
+            const computerChoice = mychoice[Math.floor(Math.random() * mychoice.length)];
+
+            const outputElement = document.getElementById("output");
+            const scoreElement = document.getElementById("score");
+
+            const result = {
+                'rock': {
+                    'rock': 'It\'s a tie!',
+                    'paper': 'You lose! Paper covers rock.',
+                    'scissor': 'You win! Rock smashes scissor.'
+                },
+                'paper': {
+                    'rock': 'You win! Paper covers rock.',
+                    'paper': 'It\'s a tie!',
+                    'scissor': 'You lose! Scissor cut paper.'
+                },
+                'scissors': {
+                    'rock': 'You lose! Rock smashes scissor.',
+                    'paper': 'You win! Scissor cut paper.',
+                    'scissor': 'It\'s a tie!'
+                }
+            };
+            const output = result[playerChoice][computerChoice];
+
+            outputElement.textContent = output;
+
+            if (output.includes('win')) {
+                score++;
+            } else if (output.includes('lose')) {
+                score--;
+            }
+
+            scoreElement.textContent = `Score: ${score}`;
+        }
+    </script>
+</body>
+</html>
